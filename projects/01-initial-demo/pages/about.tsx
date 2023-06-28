@@ -24,7 +24,7 @@ export default function AboutPage() {
 AboutPage, que es una función que recibe el componente de la pagina,
 y lo podemos envolver en otros componentes para crear layouts, aunque
 para que funcione debemos de ejecutar esta función en el archivo _app.js */
-AboutPage.getLayout = function getLayout(page) {
+AboutPage.getLayout = function getLayout(page: JSX.Element) {
   return (
     <MainLayout>
       <DarkLayout>

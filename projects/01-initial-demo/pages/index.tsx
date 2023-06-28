@@ -22,17 +22,19 @@ export default function HomePage() {
       {/* Usamos nuestro layout principal para envolver el contenido
       de la pagina index */}
       <MainLayout>
-        <h1>Home Page</h1>
+        <>
+          <h1>Home Page</h1>
 
-        <h1 className="title">
-          {/* Ir a <a href="/about">About</a> */}
-          Go to <Link href="/about">About</Link>
-        </h1>
+          <h1 className="title">
+            {/* Ir a <a href="/about">About</a> */}
+            Go to <Link href="/about">About</Link>
+          </h1>
 
-        <p className={'description'}>
-          Get started by editing{' '}
-          <code className={'code'}>pages/index.js</code>
-        </p>
+          <p className={'description'}>
+            Get started by editing{' '}
+            <code className={'code'}>pages/index.js</code>
+          </p>
+        </>
       </MainLayout>
     </>
   );

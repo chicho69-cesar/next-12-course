@@ -1,7 +1,13 @@
+import { FC } from 'react';
 import { ActiveLink } from './ActiveLink';
 import styles from './Navbar.module.css';
 
-const menuItems = [
+type MenuItem = {
+  text: string;
+  href: string;
+};
+
+const menuItems: MenuItem[] = [
   {
     text: 'Home',
     href: '/'
@@ -20,12 +26,12 @@ const menuItems = [
   },
 ];
 
-export const Navbar = () => {
+export const Navbar: FC = () => {
   return (
     /* Usamos los estilos de css modules con clases que utilizan guiones medios */
     <nav className={styles['menu-container']}>
       {
-        menuItems.map(({ text, href }) => (
+        menuItems.map(({ text, href }: MenuItem) => (
           <ActiveLink key={href} text={text} href={href} />
         ))
       }

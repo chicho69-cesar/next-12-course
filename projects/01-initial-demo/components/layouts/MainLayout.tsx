@@ -1,11 +1,16 @@
+import { FC } from 'react';
 import Head from 'next/head';
 
 import { Navbar } from '../Navbar';
 import styles from './MainLayout.module.css';
 
-/* Creamos el layout principal, el cual recibira el contenido de las paginas
+type Props = {
+  children: JSX.Element;
+};
+
+/* Creamos el layout principal, el cual recibirá el contenido de las paginas
 y lo renderizara como un children de este mismo componente */
-export const MainLayout = ({ children }) => {
+export const MainLayout: FC<Props> = ({ children }) => {
   return (
     <div className={styles.container}>
       <Head>
