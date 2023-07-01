@@ -5,15 +5,14 @@ import confetti from 'canvas-confetti'
 
 import { pokeApi } from '../../api'
 import { Layout } from '../../components/layouts'
-import { Pokemon } from '../../interfaces'
+import { Pokemon, PokemonListResponse, SmallPokemon } from '../../interfaces'
 import { getPokemonInfo, localFavorites } from '../../utils'
 
 interface Props {
   pokemon: Pokemon
 }
 
-/* Recibimos la prop "pokemon" desde la función getStaticProps */
-export const PokemonPage: NextPage<Props> = ({ pokemon }) => {
+export const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
   const [isInFavorites, setIsInFavorites] = useState<boolean>(localFavorites.existInFavorites(pokemon.id))
 
   const onToggleFavorite = () => {
@@ -104,48 +103,26 @@ export const PokemonPage: NextPage<Props> = ({ pokemon }) => {
   )
 }
 
-/* La función especial getStaticPaths es una función que debe de ser definida 
-obligatoriamente cuando usamos SSG (Static Site Generation) con rutas dinámicas
-y getStaticProps, ya que esta función va a definir los params que van a establecer cada
-una de las posibles rutas de nuestra aplicación, es decir, vamos a usar esta función
-cuando nosotros de antemano ya sabemos cuales van a ser las posibles paths de esta
-pagina, al momento de hacer el build de la aplicación, Next generara una pagina
-estática por cada una de las diferentes paths que regresemos en esta función.
-
-Cuando deberíamos usar getStaticPaths:
-
-- Cuando usamos renderizado estático con rutas dinámicas.
-- Cuando usamos getStaticProps con rutas dinámicas. */
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const pokemons151: string[] = [...Array(151)].map((_, index) => `${index + 1}`)
+  const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151')
+  const pokemonNames: string[] = data.results.map((pokemon: SmallPokemon) => pokemon.name)
 
-  /* La propiedad paths del objeto que regresamos es un arreglo de objetos
-  donde para cada path debemos de definir los params, en este caso solo tenemos
-  uno que es (id), pero si tuviéramos mas deberíamos de establecerlo aquí.
-  La propiedad fallback es un booleano que indica si queremos que Next maneje 
-  las rutas que no existen y que nos redirija a una pagina 404. Si el valor
-  es false se redirije a una pagina 404, si el valor es true se actuara como un
-  'blocking' y se redirije la primera pagina definida en las paths. */
   return {
-    paths: pokemons151.map((id: string) => ({
-      params: { id }
+    paths: pokemonNames.map((name: string) => ({
+      params: { name }
     })),
     fallback: false
   }
 }
 
-/* Desestructuramos los params del contexto de la función getStaticProps */
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { id } = params as { id: string } // Obtenemos el id de los params regresados en getStaticPaths
-  // const { data } = await pokeApi.get<Pokemon>(`/pokemon/${id}`)
+  const { name } = params as { name: string }
 
-  /* Hacemos return de la static prop "pokemon" */
   return {
     props: {
-      // pokemon: data
-      pokemon: await getPokemonInfo(id)
+      pokemon: await getPokemonInfo(name)
     }
   }
 }
 
-export default PokemonPage
+export default PokemonByNamePage
