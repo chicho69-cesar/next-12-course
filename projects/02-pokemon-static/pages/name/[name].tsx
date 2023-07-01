@@ -15,6 +15,8 @@ interface Props {
 export const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
   const [isInFavorites, setIsInFavorites] = useState<boolean>(localFavorites.existInFavorites(pokemon.id))
 
+  /* Los métodos que se ejecutan tras un evento que se genera por la interacción
+  con componentes del DOM solamente se ejecutan del lado del cliente */
   const onToggleFavorite = () => {
     localFavorites.toggleFavorite(pokemon.id)
     setIsInFavorites(!isInFavorites)
@@ -102,6 +104,9 @@ export const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
     </Layout>
   )
 }
+
+/* Estas son funciones que solo se ejecutan del lado del servidor, por lo tanto
+no tienen acceso a la información del cliente */
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
   const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151')

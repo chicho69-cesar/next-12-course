@@ -11,6 +11,8 @@ const toggleFavorite = (id: number): void => {
 }
 
 const existInFavorites = (id: number): boolean => {
+  /* Condición para cuando esta función es llamada del lado del servidor
+  donde no tenemos acceso al localStorage */
   if (typeof window === 'undefined') return false
   const favorites: number[] = JSON.parse(localStorage.getItem('favorites') || '[]')
   return favorites.includes(id)
