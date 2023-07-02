@@ -124,13 +124,26 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
   uno que es (id), pero si tuviéramos mas deberíamos de establecerlo aquí.
   La propiedad fallback es un booleano que indica si queremos que Next maneje 
   las rutas que no existen y que nos redirija a una pagina 404. Si el valor
-  es false se redirije a una pagina 404, si el valor es true se actuara como un
-  'blocking' y se redirije la primera pagina definida en las paths. */
+  es false se redirije a una pagina 404, si el valor es true
+  se redirije la primera pagina definida en las paths. */
   return {
     paths: pokemons151.map((id: string) => ({
       params: { id }
     })),
-    fallback: false
+    // fallback: false
+    /* La propiedad blocking de el objeto que regresa la función en la función
+    getStaticPaths nos permite que si la ruta solicitada no esta definida
+    en las paths esta no nos mande a la 404 y nos permite hacer ISR o ISG,
+    donde: 
+    
+    - Incremental Static (Site) Regeneration nos permite regenerar las paginas
+    de las rutas definidas cada cierta cantidad de tiempo, para que si la información
+    cambia dado un tiempo regenerar la pagina para que tenga la nueva información.
+    - Incremental Static Generation (ISG) nos permite generar la pagina de la ruta
+    aunque el parámetro no este definido en las paths, es decir, se va a generar la
+    pagina en caso de poder hacerlo aunque esta no se haya generado anteriormente, al 
+    hacer build. */
+    fallback: 'blocking'
   }
 }
 
@@ -138,13 +151,36 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string } // Obtenemos el id de los params regresados en getStaticPaths
   // const { data } = await pokeApi.get<Pokemon>(`/pokemon/${id}`)
+  
+  const pokemon = await getPokemonInfo(id)
+
+  /* Si el pokemon no existe es porque en la path que ingreso el usuario no se pudo obtener
+  un pokemon, por lo tanto lo redireccionamos a la pagina principal */
+  if (!pokemon) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false /* Esta propiedad es util para que la redirección no sea
+        permanente, y que si en un futuro ya existe este pokemon pueda volver a entrar */
+      }
+    }
+  }
+
+  /* Si el pokemon que validamos anteriormente si existe pero no esta su respectiva pagina
+  generada como contenido estático, lo que hará Next es que la va a generar de forma
+  automática, es decir, si entramos a un path donde no existe la pagina ya generada
+  pero si existe el pokemon, entonces la va a generar automáticamente. En lo que se 
+  conoce como Incremental Static Generation (ISG). */
 
   /* Hacemos return de la static prop "pokemon" */
   return {
     props: {
       // pokemon: data
-      pokemon: await getPokemonInfo(id)
-    }
+      pokemon
+    },
+    /* Hacemos un Incrementa Static Regeneration cada 24 hrs, es decir, cada dia se 
+    va a volver a hacer build de las paginas definidas en los paths */
+    revalidate: 86400 // 60 seg * 60 min * 24 hrs = 1 day
   }
 }
 
