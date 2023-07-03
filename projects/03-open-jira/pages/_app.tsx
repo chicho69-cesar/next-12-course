@@ -8,7 +8,7 @@ import { UIProvider } from '../context/ui'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <UIProvider>
+    <UIProvider> {/* Inyectamos el provider de nuestro contexto */}
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <Component {...pageProps} />
