@@ -5,6 +5,9 @@ interfaz de usuario, acciones que nos permitirán modificar el estado */
 type UIActionType = 
   | { type: 'UI - Open Sidebar' }
   | { type: 'UI - Close Sidebar' }
+  | { type: 'UI - Set isAddingEntry', payload: boolean }
+  | { type: 'UI - Start Dragging' }
+  | { type: 'UI - End Dragging' }
 
 export const uiReducer = (state: UIState, action: UIActionType): UIState => {
   // Comparamos la acción ejecutada
@@ -19,6 +22,24 @@ export const uiReducer = (state: UIState, action: UIActionType): UIState => {
       return {
         ...state,
         sidemenuOpen: false
+      }
+
+    case 'UI - Set isAddingEntry': 
+      return {
+        ...state,
+        isAddingEntry: action.payload
+      }
+
+    case 'UI - Start Dragging':
+      return {
+        ...state,
+        isDragging: true
+      }
+
+    case 'UI - End Dragging':
+      return {
+        ...state,
+        isDragging: false
       }
 
     /* Si el estado no cambia regresamos el mismo estado */

@@ -4,11 +4,15 @@ import { UIContext, uiReducer } from './'
 /* Creamos la interfaz de estado que tendrá nuestro contexto */
 export interface UIState {
   sidemenuOpen: boolean
+  isAddingEntry: boolean
+  isDragging: boolean
 }
 
 /* Creamos el estado inicial del contexto */
 const UI_INITIAL_STATE: UIState = {
   sidemenuOpen: false,
+  isAddingEntry: false,
+  isDragging: false,
 }
 
 interface Props {
@@ -31,6 +35,18 @@ export const UIProvider: FC<Props> = ({ children }) => {
     dispatch({ type: 'UI - Close Sidebar' })
   }
 
+  const setIsAddingEntry = ( isAdding: boolean ) => {
+    dispatch({ type:'UI - Set isAddingEntry', payload: isAdding });
+  }
+
+  const startDragging = () => {
+    dispatch({ type: 'UI - Start Dragging' });
+  }
+
+  const endDragging = () => {
+    dispatch({ type: 'UI - End Dragging' });
+  }
+
   /* Retornamos el provider de nuestro contexto, con el estado y con los métodos que 
   modificarán dicho estado */
   return (
@@ -40,6 +56,11 @@ export const UIProvider: FC<Props> = ({ children }) => {
       // Methods
       closeSideMenu,
       openSideMenu,
+
+      setIsAddingEntry,
+
+      endDragging,
+      startDragging,
     }}>
       {children}
     </UIContext.Provider>
