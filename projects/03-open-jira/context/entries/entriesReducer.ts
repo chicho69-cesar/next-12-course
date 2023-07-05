@@ -10,6 +10,7 @@ export const entriesReducer = (state: EntriesState, action: EntriesActionType): 
     case '[Entry] Add-Entry':
       return {
         ...state,
+        /* Modificamos el valor de las entries en base al payload recibido */
         entries: [ ...state.entries, action.payload ]
       }
 

@@ -11,13 +11,14 @@ interface Props {
 export const EntryCard: FC<Props> = ({ entry }) => {
   const { startDragging, endDragging } = useContext(UIContext)
 
+  /* Ejecutamos el evento para cuando se comience a realizar el drag de las entradas */
   const onDragStart = (event: DragEvent) => {
     event.dataTransfer.setData('text', entry._id)
-    startDragging()
+    startDragging() // Llamamos al contexto, para que inicie el dragging
   }
 
   const onDragEnd = () => {
-    endDragging()
+    endDragging() // Llamamos al contexto, para que finalice el dragging
   }
 
   return (

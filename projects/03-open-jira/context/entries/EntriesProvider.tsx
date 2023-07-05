@@ -39,6 +39,7 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(entriesReducer, Entries_INITIAL_STATE)
 
   const addNewEntry = (description: string) => {
+    /* Creamos una nueva entrada */
     const newEntry: Entry = {
       _id: uuidv4(),
       description,
@@ -46,6 +47,9 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
       status: 'pending'
     }
 
+    /* Lanzamos la acción para agregar la entrada, mandando la como payload; cuando
+    se necesita enviar algún valor que cambie el estado en el reducer se debe de 
+    mandar como payload. */
     dispatch({ type: '[Entry] Add-Entry', payload: newEntry })
   }
 

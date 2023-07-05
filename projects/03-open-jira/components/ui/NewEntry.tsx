@@ -13,14 +13,16 @@ export const NewEntry = () => {
   const [inputValue, setInputValue] = useState('')
   const [touched, setTouched] = useState(false)
 
+  /* Recibimos el evento para cuando escribimos en el TextField */
   const onTextFieldChanged = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value)
   }
 
+  /* Al guardar la entrada */
   const onSave = () => {
     if (inputValue.length === 0) return
 
-    addNewEntry(inputValue)
+    addNewEntry(inputValue) // La agregamos al estado global de las entries
     setIsAddingEntry(false)
     setTouched(false)
     setInputValue('')
