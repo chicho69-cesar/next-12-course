@@ -1,36 +1,27 @@
-# Next.JS v12.3.1 con TypeScript
+# Next.js OpenJira App
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Para poder ejecutar la aplicación en tu propio entorno de desarrollo, debes de seguir los siguientes pasos:
 
-## Getting Started
+## Configurar Docker, Base de Datos y Entorno
 
-First, run the development server:
+Para correr localmente, se necesita la base de datos, para ello debes de ejecutar el docker compose:
 
 ```bash
-npm run dev
-# or
-yarn dev
+docker-compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* El -d, significa __detached__
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Configurar las variables de entorno
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Renombrar el archivo __.env.template__ a __.env__
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+* MongoDB URL Local
 
-## Learn More
+```bash
+MONGO_URL=mongodb://localhost:27017/entriesdb
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Llenar la base de datos con información de pruebas
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Llamar el endpoint del seeder, con un verbo GET desde algún cliente REST, en entorno de desarrollo. <http://localhost:3000/api/seed>

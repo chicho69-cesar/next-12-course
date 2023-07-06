@@ -1,3 +1,6 @@
+# Local configs
+mongo/
+.env
 
 # Dependencies
 node_modules
