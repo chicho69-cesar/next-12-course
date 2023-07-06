@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
 
 import { db } from '../../../database'
 import { Entry, IEntry } from '../../../models'
@@ -9,12 +9,13 @@ type Data =
   | IEntry
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const { id } = req.query;
+  /* const { id } = req.query;
 
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({ message: `The id: ${id} is not valid` })
-  }
+  } */
 
+  /* Verificamos el método que se haya utilizado para hacer request a la API */
   switch (req.method) {
     case 'PUT':
       return updateEntry(req, res)

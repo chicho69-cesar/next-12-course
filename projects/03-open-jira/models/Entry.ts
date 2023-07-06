@@ -1,6 +1,8 @@
 import mongoose, { Model, Schema } from 'mongoose'
 import { Entry } from '../interfaces'
 
+/* Exportamos la interface IEntry para usarla como un tipo el cual tendrá los
+mismos campos que la interface Entry. */
 export interface IEntry extends Entry {}
 
 const entrySchema = new Schema({
@@ -16,6 +18,7 @@ const entrySchema = new Schema({
   }
 })
 
+/* Creamos el EntryModel el cual sera exportado en el index como Entry solamente */
 const EntryModel: Model<IEntry> = mongoose.models.Entry || mongoose.model('Entry', entrySchema)
 
 export default EntryModel

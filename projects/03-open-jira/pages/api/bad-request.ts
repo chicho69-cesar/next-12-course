@@ -5,6 +5,8 @@ type Data = {
   message: string | string[]
 }
 
+/* Vamos a utilizar este endpoint para mostrar el error que queramos, al hacer 
+validaciones desde nuestro middleware */
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const { message = 'Bad Request' } = req.query
 

@@ -38,6 +38,9 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
     }
   }
 
+  /* Usamos esta función para hacer la carga inicial de las entradas que están en 
+  base de datos mediante la acción del reducer cargamos las entradas que obtenemos
+  de la api en el estado global con el context. */
   const refreshEntries = async () => {
     const { data } = await entriesApi.get<Entry[]>('/entries')
     dispatch({ type: '[Entry] Refresh-Data', payload: data })
