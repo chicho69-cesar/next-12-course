@@ -1,4 +1,5 @@
 import { FC, useEffect, useReducer } from 'react'
+import { useSnackbar } from 'notistack'
 
 import { entriesApi } from '../../apis'
 import { EntriesContext, entriesReducer } from './'
@@ -18,6 +19,7 @@ interface Props {
 
 export const EntriesProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(entriesReducer, Entries_INITIAL_STATE)
+  const { enqueueSnackbar } = useSnackbar()
 
   const addNewEntry = async (description: string) => {
     /* Creamos una nueva entrada */
@@ -29,12 +31,55 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
     dispatch({ type: '[Entry] Add-Entry', payload: data })
   }
 
-  const updateEntry = async ({ _id, description, status }: Entry) => {
+  const updateEntry = async ({ _id, description, status }: Entry, showSnackbar = false) => {
     try {
       const { data } = await entriesApi.put<Entry>(`/entries/${_id}`, { description, status })
       dispatch({ type: '[Entry] Entry-Updated', payload: data })
+
+      if (showSnackbar) {
+        enqueueSnackbar('Entrada actualizada con éxito', {
+          variant: 'success',
+          autoHideDuration: 1500,
+          anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+          }
+        })
+      }
     } catch (error) {
-      console.log({ error })
+      enqueueSnackbar('Error al actualizar la entrada', {
+        variant: 'error',
+        autoHideDuration: 1500,
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'right',
+        }
+      })
+    }
+  }
+
+  const deleteEntry = async (id: string) => {
+    try {
+      const { data } = await entriesApi.delete<Entry>(`/entries/${id}`)
+      dispatch({ type: '[Entry] Delete-Entry', payload: data })
+
+      enqueueSnackbar('Entrada eliminada con éxito', {
+        variant: 'success',
+        autoHideDuration: 1500,
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'right',
+        }
+      })
+    } catch (error: any) {
+      enqueueSnackbar('Error al eliminar la entrada', {
+        variant: 'error',
+        autoHideDuration: 1500,
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'right',
+        }
+      })
     }
   }
 
@@ -57,6 +102,7 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
       // Methods
       addNewEntry,
       updateEntry,
+      deleteEntry,
     }}>
       {children}
     </EntriesContext.Provider>

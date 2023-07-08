@@ -22,6 +22,20 @@ Renombrar el archivo __.env.template__ a __.env__
 MONGO_URL=mongodb://localhost:27017/entriesdb
 ```
 
+## Reconstruir los módulos de Node y Levantar la Aplicación
+
+Para reconstruir los módulos de Node solamente se instalan las dependencias:
+
+```bash
+npm install
+```
+
+Una vez reconstruidos los módulos de Node, levantamos el entorno de ejecución de la aplicación con:
+
+```bash
+npm run dev
+```
+
 ## Llenar la base de datos con información de pruebas
 
 Llamar el endpoint del seeder, con un verbo GET desde algún cliente REST, en entorno de desarrollo. <http://localhost:3000/api/seed>
