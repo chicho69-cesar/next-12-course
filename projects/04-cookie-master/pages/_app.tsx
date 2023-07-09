@@ -50,21 +50,21 @@ por defecto del React componente en cada pagina. Esta regresara las props inicia
 para el componente tanto en el lado del servidor como el lado del cliente, durante 
 la transicion de las paginas, lo que retorne esta funcion sera usada por la pagina 
 como props iniciales. */
-MyApp.getInitialProps = async (appContext: AppContext) => {
-  // console.log('Hola desde el server')
+// MyApp.getInitialProps = async (appContext: AppContext) => {
+//   // console.log('Hola desde el server')
 
-  /* Accedemos al contexto de la aplicación, y obtenemos el valor de las cookies, 
-  mediante la request del usuario */
-  const { theme } = appContext.ctx.req 
-    ? (appContext.ctx.req as any).cookies 
-    : { theme: 'light' }
+//   /* Accedemos al contexto de la aplicación, y obtenemos el valor de las cookies, 
+//   mediante la request del usuario */
+//   const { theme } = appContext.ctx.req 
+//     ? (appContext.ctx.req as any).cookies 
+//     : { theme: 'light' }
 
-  const validThemes = ['light','dark','custom']
+//   const validThemes = ['light','dark','custom']
 
-  /* Regresamos las props que utilizaran cada una de las paginas */
-  return {
-    theme: validThemes.includes(theme) ? theme : 'dark',
-  }
-}
+//   /* Regresamos las props que utilizaran cada una de las paginas */
+//   return {
+//     theme: validThemes.includes(theme) ? theme : 'dark',
+//   }
+// }
 
 export default MyApp
