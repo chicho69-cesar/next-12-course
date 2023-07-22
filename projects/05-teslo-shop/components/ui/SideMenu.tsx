@@ -1,11 +1,23 @@
-import { FC } from 'react'
+import { FC, useContext } from 'react'
+import { useRouter } from 'next/router'
+
 import { Box, Divider, Drawer, IconButton, Input, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { AccountCircleOutlined, AdminPanelSettings, CategoryOutlined, ConfirmationNumberOutlined, EscalatorWarningOutlined, FemaleOutlined, LoginOutlined, MaleOutlined, SearchOutlined, VpnKeyOutlined } from '@mui/icons-material'
 
+import { UiContext } from '../../context/ui/UiContext'
+
 export const SideMenu: FC = () => {
+  const router = useRouter()
+  const { isMenuOpen, toggleSideMenu } = useContext(UiContext)
+
+  const navigateTo = (url: string) => {
+    toggleSideMenu()
+    router.push(url)
+  }
+  
   return (
     <Drawer
-      open={false}
+      open={isMenuOpen}
       anchor='right'
       sx={{ backdropFilter: 'blur(4px)', transition: 'all 0.5s ease-out' }}
     >
@@ -46,7 +58,7 @@ export const SideMenu: FC = () => {
           </ListItem>
 
           <ListItem sx={{ display: { xs: '', sm: 'none' } }}>
-            <ListItemButton>
+            <ListItemButton onClick={() => navigateTo('/category/men')}>
               <ListItemIcon>
                 <MaleOutlined/>
               </ListItemIcon>
@@ -56,7 +68,7 @@ export const SideMenu: FC = () => {
           </ListItem>
 
           <ListItem sx={{ display: { xs: '', sm: 'none' } }}>
-            <ListItemButton>
+            <ListItemButton onClick={() => navigateTo('/category/women')}>
               <ListItemIcon>
                 <FemaleOutlined/>
               </ListItemIcon>
@@ -66,7 +78,7 @@ export const SideMenu: FC = () => {
           </ListItem>
 
           <ListItem sx={{ display: { xs: '', sm: 'none' } }}>
-            <ListItemButton>
+            <ListItemButton onClick={() => navigateTo('/category/kid')}>
               <ListItemIcon>
                 <EscalatorWarningOutlined/>
               </ListItemIcon>

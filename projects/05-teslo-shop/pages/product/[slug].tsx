@@ -1,14 +1,20 @@
-import { NextPage } from 'next'
+import { NextPage, GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next'
 import { Box, Button, Chip, Grid, Typography } from '@mui/material'
 
 import { ShopLayout } from '../../components/layouts'
 import { ProductSlideshow, SizeSelector } from '../../components/products'
-import { initialData } from '../../database/products'
 import { ItemCounter } from '../../components/ui/ItemCounter'
+import { dbProducts } from '../../database'
+import { IProduct } from '../../interfaces'
 
-const product = initialData.products[0]
+interface Props {
+  product: IProduct
+}
 
-const ProductPage: NextPage = () => {
+const ProductPage: NextPage<Props> = ({ product }) => {
+  // const router = useRouter()
+  // const { products: product, isLoading } = useProducts(`/products/${router.query.slug}`)
+
   return (
     <ShopLayout title={product.title} pageDescription={product.description}>
       <Grid container spacing={3}>
@@ -20,7 +26,7 @@ const ProductPage: NextPage = () => {
 
         <Grid item xs={12} sm={5}>
           <Box display='flex' flexDirection='column'>
-            {/* titulos */}
+            {/* títulos */}
             <Typography variant='h1' component='h1'>{product.title}</Typography>
             <Typography variant='subtitle1' component='h2'>{`$${product.price}`}</Typography>
 
@@ -51,6 +57,64 @@ const ProductPage: NextPage = () => {
       </Grid>
     </ShopLayout>
   )
+}
+
+// getServerSideProps...
+//* No usar esto... SSR
+/* export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const { slug = '' } = params as { slug: string }
+  const product = await dbProducts.getProductBySlug(slug)
+
+  if (!product) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: {
+      product
+    }
+  }
+} */
+
+// getStaticPaths...
+export const getStaticPaths: GetStaticPaths = async (ctx) => {
+  const productSlugs = await dbProducts.getAllProductSlugs()
+
+  return {
+    paths: productSlugs.map(({ slug }) => ({
+      params: {
+        slug
+      }
+    })),
+    fallback: 'blocking'
+  }
+}
+
+// getStaticProps...
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { slug = '' } = params as { slug: string }
+  const product = await dbProducts.getProductBySlug(slug)
+
+  if (!product) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: {
+      product
+    },
+    revalidate: 60 * 60 * 24
+  }
 }
 
 export default ProductPage
