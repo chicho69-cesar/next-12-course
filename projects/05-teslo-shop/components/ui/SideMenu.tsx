@@ -14,6 +14,7 @@ export const SideMenu: FC = () => {
 
   const onSearchTerm = () => {
     if(searchTerm.trim().length === 0) return
+    toggleSideMenu()
     navigateTo(`/search/${searchTerm}`)
   }
 
@@ -25,6 +26,7 @@ export const SideMenu: FC = () => {
   return (
     <Drawer
       open={isMenuOpen}
+      onClose={toggleSideMenu}
       anchor='right'
       sx={{ backdropFilter: 'blur(4px)', transition: 'all 0.5s ease-out' }}
     >
