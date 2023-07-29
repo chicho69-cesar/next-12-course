@@ -32,3 +32,5 @@ Llamara:
 ```curl
 http://localhost:3000/api/seed
 ```
+
+**Version next-auth:** 4.22.3

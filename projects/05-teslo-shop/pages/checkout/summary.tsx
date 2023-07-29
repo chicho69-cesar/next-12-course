@@ -1,6 +1,8 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { NextPage } from 'next'
 import NextLink from 'next/link'
+import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 import { Link, Box, Button, Card, CardContent, Divider, Grid, Typography } from '@mui/material'
 
 import { CartContext } from '../../context'
@@ -9,9 +11,16 @@ import { CartList, OrderSummary } from '../../components/cart'
 import { countries } from '../../utils'
 
 const SummaryPage: NextPage = () => {
+  const router = useRouter()
   const { shippingAddress, numberOfItems } = useContext(CartContext)
   
-  console.log(shippingAddress)
+  // console.log(shippingAddress)
+
+  useEffect(() => {
+    if (!Cookies.get('firstName')) {
+      router.push('/checkout/address')
+    }
+  }, [router])
   
   if (!shippingAddress) {
     return <></>
@@ -47,7 +56,8 @@ const SummaryPage: NextPage = () => {
               <Typography>{firstName} {lastName}</Typography>
               <Typography>{address}{address2 ? `, ${address2}` : ''} </Typography>
               <Typography>{city}, {zip}</Typography>
-              <Typography>{countries.find((c) => c.code === country)?.name}</Typography>
+              {/* <Typography>{countries.find((c) => c.code === country)?.name}</Typography> */}
+              <Typography>{country}</Typography>
               <Typography>{phone}</Typography>
 
               <Divider sx={{ my:1 }} />

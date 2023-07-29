@@ -2,18 +2,36 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import * as jose from 'jose'
 
-export async function middleware(req: NextRequest): Promise<NextResponse> {
+export function middleware(req: NextRequest): NextResponse {
   const previousPage: string = req.nextUrl.pathname
 
   if (previousPage.startsWith('/checkout')) {
-    return validateToken(req, previousPage)
+    // return validateToken(req, previousPage)
+    return validateSession(req)
+  }
+
+  return NextResponse.next()
+}
+
+function validateSession(req: NextRequest): NextResponse {
+  // const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
+  const session: (string | undefined) = req.cookies.get('next-auth.session-token')
+
+  if (!session) {
+    const requestedPage: string = req.nextUrl.pathname
+    const url = req.nextUrl.clone()
+
+    url.pathname = `/auth/login`
+    url.search = `p=${requestedPage}`
+
+    return NextResponse.redirect(url)
   }
 
   return NextResponse.next()
 }
 
 async function validateToken(req: NextRequest, previousPage: string): Promise<NextResponse> {
-  const token: (string | undefined) = req.cookies.get("token")
+  const token: (string | undefined) = req.cookies.get('token')
   if (!token) {
     return NextResponse.redirect(
       new URL(`/auth/login?p=${previousPage}`, req.url)
@@ -41,6 +59,8 @@ async function validateToken(req: NextRequest, previousPage: string): Promise<Ne
 
 export const config = {
   matcher: [
-    '/checkout/:path*',
+    '/checkout/address', 
+    '/checkout/summary',
+    // '/checkout/:path*',
   ],
 }
