@@ -36,7 +36,7 @@ const getAddressFromCookies = (): FormData => {
 
 const AddressPage: NextPage = () => {
   const router = useRouter()
-  const { updateAddress} = useContext(CartContext)
+  const { updateAddress } = useContext(CartContext)
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
     defaultValues: {
