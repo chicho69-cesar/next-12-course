@@ -1,8 +1,19 @@
 import { FC, useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { Box, Divider, Drawer, IconButton, Input, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
-import { AccountCircleOutlined, AdminPanelSettings, CategoryOutlined, ConfirmationNumberOutlined, EscalatorWarningOutlined, FemaleOutlined, LoginOutlined, MaleOutlined, SearchOutlined, VpnKeyOutlined } from '@mui/icons-material'
+import {
+  Box, Divider, Drawer, IconButton,
+  Input, InputAdornment, List, ListItem,
+  ListItemButton, ListItemIcon, ListItemText, ListSubheader,
+} from '@mui/material'
+import {
+  AccountCircleOutlined, AdminPanelSettings,
+  CategoryOutlined, ConfirmationNumberOutlined,
+  DashboardOutlined, EscalatorWarningOutlined,
+  FemaleOutlined, LoginOutlined,
+  MaleOutlined, SearchOutlined,
+  VpnKeyOutlined,
+} from '@mui/icons-material'
 
 import { UiContext, AuthContext } from '../../context'
 
@@ -107,8 +118,8 @@ export const SideMenu: FC = () => {
           </ListItem>
 
           {isLoggedIn ? (
-            <ListItem onClick={logout}>
-              <ListItemButton>
+            <ListItem>
+              <ListItemButton onClick={logout}>
                 <ListItemIcon>
                   <LoginOutlined />
                 </ListItemIcon>
@@ -117,10 +128,8 @@ export const SideMenu: FC = () => {
               </ListItemButton>
             </ListItem>
           ) : (
-            <ListItem
-              onClick={() => navigateTo(`/auth/login?p=${router.asPath}`)}
-            >
-              <ListItemButton>
+            <ListItem>
+              <ListItemButton onClick={() => navigateTo(`/auth/login?p=${router.asPath}`)}>
                 <ListItemIcon>
                   <VpnKeyOutlined />
                 </ListItemIcon>
@@ -137,6 +146,16 @@ export const SideMenu: FC = () => {
               <ListSubheader>Admin Panel</ListSubheader>
 
               <ListItem>
+                <ListItemButton onClick={() => navigateTo('/admin/')}>
+                  <ListItemIcon>
+                    <DashboardOutlined />
+                  </ListItemIcon>
+
+                  <ListItemText primary={'Dashboard'} />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem>
                 <ListItemButton>
                   <ListItemIcon>
                     <CategoryOutlined />
@@ -147,7 +166,7 @@ export const SideMenu: FC = () => {
               </ListItem>
 
               <ListItem>
-                <ListItemButton>
+                <ListItemButton onClick={() => navigateTo('/admin/orders')}>
                   <ListItemIcon>
                     <ConfirmationNumberOutlined />
                   </ListItemIcon>
@@ -157,7 +176,7 @@ export const SideMenu: FC = () => {
               </ListItem>
 
               <ListItem>
-                <ListItemButton>
+                <ListItemButton onClick={() => navigateTo('/admin/users')}>
                   <ListItemIcon>
                     <AdminPanelSettings />
                   </ListItemIcon>

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-server-import-in-page */
 import { NextResponse, type NextRequest } from 'next/server'
 import * as jose from 'jose'
+import jwt from 'jsonwebtoken'
 
 export function middleware(req: NextRequest): NextResponse {
   const previousPage: string = req.nextUrl.pathname
@@ -10,11 +11,15 @@ export function middleware(req: NextRequest): NextResponse {
     return validateSession(req)
   }
 
+  if (previousPage.startsWith('/admin')) {
+    return validateSession(req)
+  }
+
   return NextResponse.next()
 }
 
 function validateSession(req: NextRequest): NextResponse {
-  // const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
+  // const xd = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
   const session: (string | undefined) = req.cookies.get('next-auth.session-token')
 
   if (!session) {
@@ -61,6 +66,8 @@ export const config = {
   matcher: [
     '/checkout/address', 
     '/checkout/summary',
+    '/admin/:path*',
+    '/api/admin/:path*',
     // '/checkout/:path*',
   ],
 }
