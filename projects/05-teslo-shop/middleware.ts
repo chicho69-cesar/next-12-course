@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-server-import-in-page */
 import { NextResponse, type NextRequest } from 'next/server'
-import * as jose from 'jose'
-import jwt from 'jsonwebtoken'
+// import * as jose from 'jose'
 
 export function middleware(req: NextRequest): NextResponse {
   const previousPage: string = req.nextUrl.pathname
@@ -12,14 +11,13 @@ export function middleware(req: NextRequest): NextResponse {
   }
 
   if (previousPage.startsWith('/admin')) {
-    return validateSession(req)
+    return validateIsLoggedAdmin(req)
   }
 
   return NextResponse.next()
 }
 
 function validateSession(req: NextRequest): NextResponse {
-  // const xd = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
   const session: (string | undefined) = req.cookies.get('next-auth.session-token')
 
   if (!session) {
@@ -35,7 +33,20 @@ function validateSession(req: NextRequest): NextResponse {
   return NextResponse.next()
 }
 
-async function validateToken(req: NextRequest, previousPage: string): Promise<NextResponse> {
+function validateIsLoggedAdmin(req: NextRequest): NextResponse {
+  const session: (string | undefined) = req.cookies.get('next-auth.session-token')
+
+  if (!session) {
+    const url = req.nextUrl.clone()
+    url.pathname = `/auth/login`
+
+    return NextResponse.redirect(url)
+  }
+
+  return NextResponse.next()
+}
+
+/* async function validateToken(req: NextRequest, previousPage: string): Promise<NextResponse> {
   const token: (string | undefined) = req.cookies.get('token')
   if (!token) {
     return NextResponse.redirect(
@@ -60,7 +71,7 @@ async function validateToken(req: NextRequest, previousPage: string): Promise<Ne
       `${protocol}//${host}/auth/login?p=${pathname}`
     )
   }
-}
+} */
 
 export const config = {
   matcher: [

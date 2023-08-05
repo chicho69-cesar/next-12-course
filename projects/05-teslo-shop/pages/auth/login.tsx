@@ -51,7 +51,7 @@ const LoginPage: NextPage = () => {
     // const destination = router.query.p?.toString() || '/'
     // router.replace(destination)
 
-    await signIn('credentials',{ email, password })
+    await signIn('credentials', { email, password })
   }
 
   return (

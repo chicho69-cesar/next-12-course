@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { isValidObjectId } from 'mongoose'
+import { getSession } from 'next-auth/react'
 
 import { db } from '../../../database'
 import { IUser } from '../../../interfaces'
@@ -9,7 +10,17 @@ type Data =
   | { message: string }
   | IUser[]
 
-export default function handler (req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function handler (req: NextApiRequest, res: NextApiResponse<Data>) {
+  const session: any = await getSession({ req })
+
+  if (!session) {
+    return res.status(401).json({ message: 'Debe de estar autenticado para hacer esto' })
+  }
+
+  if (session.user.role !== 'admin') {
+    return res.status(401).json({ message: 'No tiene permiso para hacer esto' })
+  }
+
   switch (req.method) {
     case 'GET':
       return getUsers(req, res)

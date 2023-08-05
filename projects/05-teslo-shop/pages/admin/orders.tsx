@@ -1,4 +1,6 @@
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 import { Chip, Grid } from '@mui/material'
 import { ConfirmationNumberOutlined } from '@mui/icons-material'
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
@@ -38,6 +40,15 @@ const columns: GridColDef[] = [
 
 const OrdersPage: NextPage = () => {
   const { data, error } = useSWR<IOrder[]>('/api/admin/orders')
+  const { data: session }: any = useSession()
+  const router = useRouter()
+
+  if (session != undefined) {
+    if (!session.user.role || session.user.role !== 'admin') {
+      router.push(`/`)
+      return (<></>)
+    }
+  }
 
   if (!data && !error) return (<></>)
 

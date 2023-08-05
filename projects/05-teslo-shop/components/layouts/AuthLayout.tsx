@@ -20,7 +20,7 @@ export const AuthLayout: FC<Props> = ({ children, title }) => {
           justifyContent='center' 
           alignItems='center' 
           height='calc(100vh - 200px)'
-        >   
+        >
           {children}
         </Box>
       </main>

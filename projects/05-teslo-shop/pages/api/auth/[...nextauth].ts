@@ -20,6 +20,7 @@ export const authOptions: NextAuthOptions = {
         console.log({ credentials })
         // return { name: 'Juan', correo: 'juan@google.com', role: 'admin' }
 
+        const isValidLogin = await dbUsers.checkUserEmailPassword(credentials!.email, credentials!.password)
         return await dbUsers.checkUserEmailPassword(credentials!.email, credentials!.password)
       }
     }),

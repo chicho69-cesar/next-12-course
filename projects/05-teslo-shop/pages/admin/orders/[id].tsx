@@ -1,4 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 import { Box, Card, CardContent, Divider, Grid, Typography, Chip } from '@mui/material'
 import { AirplaneTicketOutlined, CreditCardOffOutlined, CreditScoreOutlined } from '@mui/icons-material'
 
@@ -12,6 +14,16 @@ interface Props {
 }
 
 const OrderPage: NextPage<Props> = ({ order }) => {
+  const { data: session }: any = useSession()
+  const router = useRouter()
+
+  if (session != undefined) {
+    if (!session.user.role || session.user.role !== 'admin') {
+      router.push(`/`)
+      return (<></>)
+    }
+  }
+
   const { shippingAddress } = order
 
   return (

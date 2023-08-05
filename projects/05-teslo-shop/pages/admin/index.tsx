@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 import { Grid, Typography } from '@mui/material'
 import {
@@ -29,6 +31,16 @@ const DashboardPage: NextPage = () => {
 
     return () => clearInterval(interval)
   }, [])
+
+  const { data: session }: any = useSession()
+  const router = useRouter()
+
+  if (session != undefined) {
+    if (!session.user.role || session.user.role !== 'admin') {
+      router.push(`/`)
+      return (<></>)
+    }
+  }
 
   if (!error && !data) {
     return <></>

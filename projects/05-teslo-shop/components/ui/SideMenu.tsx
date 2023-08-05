@@ -25,7 +25,7 @@ export const SideMenu: FC = () => {
   const [searchTerm, setSearchTerm] = useState('')
 
   const onSearchTerm = () => {
-    if(searchTerm.trim().length === 0) return
+    if (searchTerm.trim().length === 0) return
     toggleSideMenu()
     navigateTo(`/search/${searchTerm}`)
   }

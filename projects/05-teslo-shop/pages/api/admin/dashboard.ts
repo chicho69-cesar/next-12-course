@@ -1,19 +1,32 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { getSession } from 'next-auth/react'
 
 import { db } from '../../../database'
 import { Order, Product, User } from '../../../models'
 
-type Data = {
-  numberOfOrders: number
-  paidOrders: number // isPad true
-  notPaidOrders: number
-  numberOfClients: number // role: client
-  numberOfProducts: number
-  productsWithNoInventory: number // 0
-  lowInventory: number // productos con 10 o menos
-}
+type Data = 
+  | {
+    numberOfOrders: number
+    paidOrders: number // isPad true
+    notPaidOrders: number
+    numberOfClients: number // role: client
+    numberOfProducts: number
+    productsWithNoInventory: number // 0
+    lowInventory: number // productos con 10 o menos
+  }
+  | { message: string }
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse<Data>) {
+  const session: any = await getSession({ req })
+
+  if (!session) {
+    return res.status(401).json({ message: 'Debe de estar autenticado para hacer esto' })
+  }
+
+  if (session.user.role !== 'admin') {
+    return res.status(401).json({ message: 'No tiene permiso para hacer esto' })
+  }
+
   await db.connect()
 
   /* const numberOfOrders = await Order.count()

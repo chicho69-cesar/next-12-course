@@ -1,5 +1,7 @@
-import { NextPage } from 'next'
 import { useState, useEffect } from 'react'
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 import { Grid, Select, MenuItem } from '@mui/material'
 import { PeopleOutline } from '@mui/icons-material'
@@ -18,6 +20,16 @@ const UsersPage: NextPage = () => {
       setUsers(data)
     }
   }, [data])
+
+  const { data: session }: any = useSession()
+  const router = useRouter()
+
+  if (session != undefined) {
+    if (!session.user.role || session.user.role !== 'admin') {
+      router.push(`/`)
+      return (<></>)
+    }
+  }
 
   if (!data && !error) return (<></>)
 
