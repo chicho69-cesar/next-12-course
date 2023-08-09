@@ -79,7 +79,7 @@ const ThemeChangerPage: FC<Props> = ({ theme }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const { theme = 'light', name = 'No name' } = req.cookies
-  const validThemes: string[] = ['light','dark','custom']
+  const validThemes: string[] = ['light', 'dark', 'custom']
 
   return {
     props: {
