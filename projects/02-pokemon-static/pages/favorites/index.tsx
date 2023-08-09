@@ -7,12 +7,12 @@ import { NoFavorites } from '../../components/ui'
 import { FavoritePokemons } from '../../components/pokemon'
 
 const FavoritesPage: NextPage = () => {
-  /* Los estados son código que solamente se ejecutara en el cliente, ya que esto
-  no es propiamente código que deba ser prerenderizado en el servidor, por lo tanto
-  esto se hidratara al código de la app en el cliente */
+  /* Los estados son código que se ejecutan tanto del lado del cliente como del 
+  servidor, ya que el servidor también necesita acceder al estado de los componentes
+  para renderizarlos */
   const [favoritePokemons, setFavoritePokemons] = useState<number[]>([])
 
-  /* Los efectos también son código que se hidrata en el cliente y por ende
+  /* Los efectos son código que se hidrata en el cliente y por ende
   no se ejecuta ni en el servidor ni en build time */
   useEffect(() => {
     setFavoritePokemons(localFavorites.pokemons())

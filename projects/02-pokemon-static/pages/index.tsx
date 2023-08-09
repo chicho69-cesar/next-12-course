@@ -43,7 +43,7 @@ momento de la compilación antes de la solicitud del usuario.
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151')
 
-  const pokemons: SmallPokemon[] = data.results.map( (poke, i) => ({
+  const pokemons: SmallPokemon[] = data.results.map((poke, i) => ({
     ...poke,
     id: i + 1,
     img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${i + 1}.svg`
