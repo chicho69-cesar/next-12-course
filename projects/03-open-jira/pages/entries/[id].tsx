@@ -55,7 +55,7 @@ const EntryPage: NextPage<Props> = ({ entry }) => {
   }
 
   return (
-    <Layout title={inputValue.substring(0,20) + '...'}>
+    <Layout title={inputValue.substring(0, 20) + '...'}>
       <Grid
         container
         justifyContent='center'
@@ -90,16 +90,14 @@ const EntryPage: NextPage<Props> = ({ entry }) => {
                   value={status}
                   onChange={onStatusChanged}
                 >
-                  {
-                    validStatus.map((option: EntryStatus) => (
-                      <FormControlLabel 
-                        key={option}
-                        value={option}
-                        control={<Radio />}
-                        label={capitalize(option)}
-                      />
-                    ))
-                  }
+                  {validStatus.map((option: EntryStatus) => (
+                    <FormControlLabel 
+                      key={option}
+                      value={option}
+                      control={<Radio />}
+                      label={capitalize(option)}
+                    />
+                  ))}
                 </RadioGroup>
               </FormControl>
             </CardContent>

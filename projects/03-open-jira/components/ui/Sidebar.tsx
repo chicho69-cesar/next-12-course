@@ -26,49 +26,41 @@ export const Sidebar = () => {
         </Box>
 
         <List>
-          {
-            menuItems.map( (text, index) => (
-              <ListItem key={ text }>
-                <ListItemButton>
-                  <ListItemIcon>
-                    { 
-                      index % 2 ? (
-                        <InboxOutlinedIcon />
-                      ) : (
-                        <MailOutlineOutlinedIcon />
-                      )
-                    }
-                  </ListItemIcon>
+          {menuItems.map((text, index) => (
+            <ListItem key={text}>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 ? (
+                    <InboxOutlinedIcon />
+                  ) : (
+                    <MailOutlineOutlinedIcon />
+                  )}
+                </ListItemIcon>
 
-                  <ListItemText primary={ text } />
-                </ListItemButton>
-              </ListItem>
-            ))
-          }
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
 
         <Divider />
 
         <List>
-          {
-            menuItems.map( (text, index) => (
-              <ListItem key={ text }>
-                <ListItemButton>
-                  <ListItemIcon>
-                    { 
-                      index % 2 ? (
-                        <InboxOutlinedIcon />
-                      ) : (
-                        <MailOutlineOutlinedIcon />
-                      )  
-                    }
-                  </ListItemIcon>
-                  
-                  <ListItemText primary={ text } />
-                </ListItemButton>
-              </ListItem>
-            ))
-          }
+          {menuItems.map((text, index) => (
+            <ListItem key={text}>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 ? (
+                    <InboxOutlinedIcon />
+                  ) : (
+                    <MailOutlineOutlinedIcon />
+                  )}
+                </ListItemIcon>
+                
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
       </Box>
     </Drawer>

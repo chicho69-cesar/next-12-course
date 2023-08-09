@@ -1,3 +1,5 @@
+import styles from './EntryList.module.css'
+
 import { FC, useContext, useMemo, DragEvent } from 'react'
 import { List, Paper } from '@mui/material'
 
@@ -5,8 +7,6 @@ import { EntriesContext } from '../../context/entries'
 import { UIContext } from '../../context/ui'
 import { Entry, EntryStatus } from '../../interfaces'
 import { EntryCard } from './'
-
-import styles from './EntryList.module.css'
 
 interface Props {
   status: EntryStatus
@@ -39,7 +39,6 @@ export const EntryList: FC<Props> = ({ status }) => {
   }
 
   return (
-    // TODO: aquí haremos drop
     /* Los elementos div son los mas indicados para recibir los drops de los elementos
     que se draggean hacia ellos */
     <div
@@ -57,11 +56,9 @@ export const EntryList: FC<Props> = ({ status }) => {
         }}
       >
         <List sx={{ opacity: isDragging ? 0.2 : 1, transition: 'all .3s' }}> 
-          {
-            entriesByStatus.map((entry: Entry) => (
-              <EntryCard key={entry._id} entry={entry} />
-            ))
-          }
+          {entriesByStatus.map((entry: Entry) => (
+            <EntryCard key={entry._id} entry={entry} />
+          ))}
         </List>
       </Paper>
     </div>
