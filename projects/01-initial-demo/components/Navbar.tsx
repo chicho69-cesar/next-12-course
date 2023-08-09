@@ -1,11 +1,12 @@
-import { FC } from 'react';
-import { ActiveLink } from './ActiveLink';
-import styles from './Navbar.module.css';
+import styles from './Navbar.module.css'
+
+import { FC } from 'react'
+import { ActiveLink } from './ActiveLink'
 
 type MenuItem = {
-  text: string;
-  href: string;
-};
+  text: string
+  href: string
+}
 
 const menuItems: MenuItem[] = [
   {
@@ -24,7 +25,7 @@ const menuItems: MenuItem[] = [
     text: 'Pricing',
     href: '/pricing'
   },
-];
+]
 
 export const Navbar: FC = () => {
   return (
@@ -43,5 +44,5 @@ export const Navbar: FC = () => {
         <ActiveLink text="Pricing" href="/pricing" />  
       */}
     </nav>
-  );
-};
+  )
+}

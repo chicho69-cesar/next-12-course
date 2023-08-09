@@ -1,12 +1,13 @@
-import { FC } from 'react';
-import Head from 'next/head';
+import styles from './MainLayout.module.css'
 
-import { Navbar } from '../Navbar';
-import styles from './MainLayout.module.css';
+import { FC } from 'react'
+import Head from 'next/head'
+
+import { Navbar } from '../Navbar'
 
 type Props = {
-  children: JSX.Element;
-};
+  children?: JSX.Element
+}
 
 /* Creamos el layout principal, el cual recibirá el contenido de las paginas
 y lo renderizara como un children de este mismo componente */
@@ -16,8 +17,8 @@ export const MainLayout: FC<Props> = ({ children }) => {
       <Head>
         <title>Initial - NextJS</title>
         
-        <meta name="description" content="Initial - NextJS" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name='description' content='Initial - NextJS' />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <Navbar />
@@ -27,4 +28,4 @@ export const MainLayout: FC<Props> = ({ children }) => {
       </main>
     </div>
   )
-};
+}
