@@ -16,8 +16,8 @@ export const ProductCard: FC<Props> = ({ product }) => {
   una vez, la primera que hacemos hover y cuando lo quitamos */
   const productImage = useMemo(() => {
     return isHovered
-      ? `/products/${product.images[1]}`
-      : `/products/${product.images[0]}`
+      ? product.images[1]
+      : product.images[0]
   }, [isHovered, product.images])
 
   return (

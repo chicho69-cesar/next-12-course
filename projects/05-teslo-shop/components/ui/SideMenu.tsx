@@ -156,7 +156,7 @@ export const SideMenu: FC = () => {
               </ListItem>
 
               <ListItem>
-                <ListItemButton>
+                <ListItemButton onClick={() => navigateTo('/admin/products')}>
                   <ListItemIcon>
                     <CategoryOutlined />
                   </ListItemIcon>

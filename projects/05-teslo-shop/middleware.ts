@@ -78,7 +78,7 @@ export const config = {
     '/checkout/address', 
     '/checkout/summary',
     '/admin/:path*',
-    '/api/admin/:path*',
+    '/((?!api/admin/upload)api/admin/:path*)',
     // '/checkout/:path*',
   ],
 }
