@@ -11,8 +11,8 @@ type Data = {
 
 export const config = {
   api: {
-    bodyParser: false
-  }
+    bodyParser: false,
+  },
 }
 
 export default function handler (req: NextApiRequest, res: NextApiResponse<Data>) {

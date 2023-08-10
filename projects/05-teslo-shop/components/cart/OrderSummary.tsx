@@ -52,11 +52,11 @@ export const OrderSummary: FC<Props> = ({ orderValues }) => {
 
       <>
         <Grid item xs={6} sx={{ mt:2 }}>
-          <Typography variant="subtitle1">Total:</Typography>
+          <Typography variant='subtitle1'>Total:</Typography>
         </Grid>
 
         <Grid item xs={6} sx={{ mt:2 }} display='flex' justifyContent='end'>
-          <Typography variant="subtitle1">{currency.format(summaryValues.total)}</Typography>
+          <Typography variant='subtitle1'>{currency.format(summaryValues.total)}</Typography>
         </Grid>
       </>
     </Grid>

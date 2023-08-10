@@ -42,7 +42,7 @@ const RegisterPage: NextPage = () => {
     // const destination = router.query.p?.toString() || '/'
     // router.replace(destination)
 
-    await signIn('credentials',{ email, password })
+    await signIn('credentials', { email, password })
   }
 
   return (
@@ -51,21 +51,21 @@ const RegisterPage: NextPage = () => {
         <Box sx={{ width: 350, padding: '10px 20px' }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography variant='h1' component="h1">Crear cuenta</Typography>
+              <Typography variant='h1' component='h1'>Crear cuenta</Typography>
               
               <Chip
-                label="No reconocemos ese usuario / contraseña"
-                color="error"
+                label='No reconocemos ese usuario / contraseña'
+                color='error'
                 icon={<ErrorOutline />}
-                className="fadeIn"
+                className='fadeIn'
                 sx={{ display: showError ? 'flex' : 'none' }}
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                label="Nombre completo"
-                variant="filled"
+                label='Nombre completo'
+                variant='filled'
                 fullWidth
                 {...register('name', {
                   required: 'Este campo es requerido',
@@ -78,9 +78,9 @@ const RegisterPage: NextPage = () => {
 
             <Grid item xs={12}>
               <TextField
-                type="email"
-                label="Correo"
-                variant="filled"
+                type='email'
+                label='Correo'
+                variant='filled'
                 fullWidth
                 {...register('email', {
                   required: 'Este campo es requerido',
@@ -93,9 +93,9 @@ const RegisterPage: NextPage = () => {
             
             <Grid item xs={12}>
               <TextField
-                label="Contraseña"
+                label='Contraseña'
                 type='password'
-                variant="filled"
+                variant='filled'
                 fullWidth
                 {...register('password', {
                   required: 'Este campo es requerido',
@@ -108,8 +108,8 @@ const RegisterPage: NextPage = () => {
 
             <Grid item xs={12}>
               <Button
-                type="submit"
-                color="secondary"
+                type='submit'
+                color='secondary'
                 className='circular-btn'
                 size='large'
                 fullWidth

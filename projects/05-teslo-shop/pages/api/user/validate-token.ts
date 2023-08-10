@@ -16,7 +16,7 @@ type Data =
     }
   }
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default function handler (req: NextApiRequest, res: NextApiResponse<Data>) {
   switch (req.method) {
     case 'GET':
       return checkJWT(req, res)

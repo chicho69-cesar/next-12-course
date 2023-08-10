@@ -19,7 +19,7 @@ export const SummaryTile: FC<Props> = ({ title, subTitle, icon }) => {
             alignItems: 'center' 
           }}
         >
-          {/* <CreditCardOffOutlined color="secondary" sx={{ fontSize: 40 }} /> */}
+          {/* <CreditCardOffOutlined color='secondary' sx={{ fontSize: 40 }} /> */}
           {icon}
         </CardContent>
 

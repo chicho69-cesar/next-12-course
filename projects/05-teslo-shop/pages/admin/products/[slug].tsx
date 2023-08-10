@@ -12,9 +12,9 @@ import { dbProducts } from '../../../database'
 import { tesloApi } from '../../../api'
 import { Product } from '../../../models'
 
-const validTypes  = ['shirts','pants','hoodies','hats']
-const validGender = ['men','women','kid','unisex']
-const validSizes = ['XS','S','M','L','XL','XXL','XXXL']
+const validTypes  = ['shirts', 'pants', 'hoodies', 'hats']
+const validGender = ['men', 'women', 'kid', 'unisex']
+const validSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
 
 interface FormData {
   _id?:        string

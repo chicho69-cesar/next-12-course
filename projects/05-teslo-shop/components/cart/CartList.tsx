@@ -26,7 +26,6 @@ export const CartList: FC<Props> = ({ editable = false, products }) => {
       {productsToShow.map((product: (IOrderItem | ICartProduct)) => (
         <Grid container spacing={2} key={product.slug + product.size} sx={{ mb:1 }}>
           <Grid item xs={3}>
-            {/* TODO: llevar a la página del producto */}
             <NextLink href={`/product/${product.slug}`} passHref>
               <Link>
                 <CardActionArea>
@@ -49,7 +48,7 @@ export const CartList: FC<Props> = ({ editable = false, products }) => {
                 <ItemCounter 
                   currentValue={product.quantity}
                   maxValue={10}
-                  updatedQuantity={(value: number) => onNewCartQuantityValue(product as ICartProduct, value)}
+                  updatedQuantity={(value) => onNewCartQuantityValue(product as ICartProduct, value)}
                 />
               ) : (
                 <Typography variant='h5'>{product.quantity} {product.quantity > 1 ? 'productos' : 'producto'}</Typography>

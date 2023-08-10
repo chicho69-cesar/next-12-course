@@ -18,13 +18,13 @@ const SearchPage: NextPage<Props> = ({ products, foundProducts, query }) => {
       <Typography variant='h1' component='h1'>Buscar productos</Typography>
 
       {foundProducts ? (
-        <Typography variant='h2' sx={{ mb: 1 }} textTransform="capitalize">
+        <Typography variant='h2' sx={{ mb: 1 }} textTransform='capitalize'>
           Término: {query}
         </Typography>
       ) : (
         <Box display='flex'>
           <Typography variant='h2' sx={{ mb: 1 }}>No encontramos ningún producto</Typography>
-          <Typography variant='h2' sx={{ ml: 1 }} color="secondary" textTransform="capitalize">{query}</Typography>
+          <Typography variant='h2' sx={{ ml: 1 }} color='secondary' textTransform='capitalize'>{query}</Typography>
         </Box>
       )}
 
@@ -40,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     return {
       redirect: {
         destination: '/',
-        permanent: true
+        permanent: true,
       }
     }
   }
@@ -49,7 +49,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   let products = await dbProducts.getProductsByTerm(query)
   const foundProducts = products.length > 0
 
-  // TODO: retornar otros productos
   if (!foundProducts) {
     // products = await dbProducts.getAllProducts() 
     products = await dbProducts.getProductsByTerm('shirt')

@@ -14,7 +14,7 @@ interface Props {
 export const SizeSelector: FC<Props> = ({ selectedSize, sizes, onSelectedSize }) => {
   return (
     <Box>
-      {sizes.map((size: ISize) => (
+      {sizes.map((size) => (
         <Button
           key={size}
           size='small'

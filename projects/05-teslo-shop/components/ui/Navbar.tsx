@@ -37,11 +37,11 @@ export const Navbar: FC = () => {
             display: isSearchVisible 
               ? 'none' : { xs: 'none', sm: 'block' },
           }}
-          className="fadeIn"
+          className='fadeIn'
         >
           <NextLink href='/category/men' passHref>
             <Link>
-              <Button color={ asPath === '/category/men' ? 'primary' : 'info' }>
+              <Button color={asPath === '/category/men' ? 'primary' : 'info'}>
                 Hombres
               </Button>
             </Link>
@@ -49,7 +49,7 @@ export const Navbar: FC = () => {
 
           <NextLink href='/category/women' passHref>
             <Link>
-              <Button color={ asPath === '/category/women' ? 'primary' : 'info' }>
+              <Button color={asPath === '/category/women' ? 'primary' : 'info'}>
                 Mujeres
               </Button>
             </Link>
@@ -57,7 +57,7 @@ export const Navbar: FC = () => {
           
           <NextLink href='/category/kid' passHref>
             <Link>
-              <Button color={ asPath === '/category/kid' ? 'primary' : 'info' }>
+              <Button color={asPath === '/category/kid' ? 'primary' : 'info'}>
                 Niños
               </Button>
             </Link>
@@ -77,9 +77,9 @@ export const Navbar: FC = () => {
             onKeyDown={(e) => e.key === 'Enter' ? onSearchTerm() : null}
             onKeyPress={(e) => e.key === 'Enter' ? onSearchTerm() : null}
             type='text'
-            placeholder="Buscar..."
+            placeholder='Buscar...'
             endAdornment={
-              <InputAdornment position="end">
+              <InputAdornment position='end'>
                 <IconButton
                   onClick={() => setIsSearchVisible(false)}
                 >
@@ -91,7 +91,7 @@ export const Navbar: FC = () => {
         ) : (
           <IconButton 
             onClick={() => setIsSearchVisible(true)}
-            className="fadeIn"
+            className='fadeIn'
             sx={{ display: { xs: 'none', sm: 'flex' } }}
           >
             <SearchOutlined />
@@ -100,15 +100,15 @@ export const Navbar: FC = () => {
 
         <IconButton
           sx={{ display: { xs: 'flex', sm: 'none' } }}
-          onClick={ toggleSideMenu }
+          onClick={toggleSideMenu}
         >
           <SearchOutlined />
         </IconButton>
 
-        <NextLink href="/cart" passHref>
+        <NextLink href='/cart' passHref>
           <Link>
             <IconButton>
-              <Badge badgeContent={numberOfItems > 9 ? '+9': numberOfItems} color="secondary">
+              <Badge badgeContent={numberOfItems > 9 ? '+9': numberOfItems} color='secondary'>
                 <ShoppingCartOutlined />
               </Badge>
             </IconButton>

@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Box, Button, Grid, TextField, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import Cookies from 'js-cookie'
 
@@ -61,17 +61,17 @@ const AddressPage: NextPage = () => {
   }
   
   return (
-    <ShopLayout title="Dirección" pageDescription="Confirmar dirección del destino">
+    <ShopLayout title='Dirección' pageDescription='Confirmar dirección del destino'>
       <form onSubmit={ handleSubmit( onSubmitAddress ) }>
-          <Typography variant="h1" component='h1'>Dirección</Typography>
+          <Typography variant='h1' component='h1'>Dirección</Typography>
 
           <Grid container spacing={2} sx={{ mt: 2 }}>
             <Grid item xs={12} sm={6}>
               <TextField
                 label='Nombre'
-                variant="filled"
+                variant='filled'
                 fullWidth 
-                { ...register('firstName', {
+                {...register('firstName', {
                   required: 'Este campo es requerido'
                 })}
                 error={!!errors.firstName}
@@ -82,9 +82,9 @@ const AddressPage: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 label='Apellido'
-                variant="filled"
+                variant='filled'
                 fullWidth
-                { ...register('lastName', {
+                {...register('lastName', {
                   required: 'Este campo es requerido'
                 })}
                 error={!!errors.lastName}
@@ -95,9 +95,9 @@ const AddressPage: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 label='Dirección'
-                variant="filled"
+                variant='filled'
                 fullWidth
-                { ...register('address', {
+                {...register('address', {
                   required: 'Este campo es requerido'
                 })}
                 error={!!errors.address}
@@ -108,18 +108,18 @@ const AddressPage: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField 
                 label='Dirección 2 (opcional)' 
-                variant="filled" 
+                variant='filled' 
                 fullWidth 
-                { ...register('address2')}
+                {...register('address2')}
               />
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <TextField 
                 label='Código Postal'
-                variant="filled"
+                variant='filled'
                 fullWidth
-                { ...register('zip', {
+                {...register('zip', {
                   required: 'Este campo es requerido'
                 })}
                 error={!!errors.zip}
@@ -130,9 +130,9 @@ const AddressPage: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 label='Ciudad'
-                variant="filled"
+                variant='filled'
                 fullWidth
-                { ...register('city', {
+                {...register('city', {
                   required: 'Este campo es requerido'
                 })}
                 error={!!errors.city}
@@ -144,11 +144,11 @@ const AddressPage: NextPage = () => {
               {/* <FormControl fullWidth> */}
                 <TextField
                   // select
-                  variant="filled"
-                  label="País"
+                  variant='filled'
+                  label='País'
                   fullWidth
                   // defaultValue={Cookies.get('country') || countries[0].code}
-                  { ...register('country', {
+                  {...register('country', {
                     required: 'Este campo es requerido'
                   })}
                   error={!!errors.country}
@@ -169,9 +169,9 @@ const AddressPage: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 label='Teléfono'
-                variant="filled"
+                variant='filled'
                 fullWidth
-                { ...register('phone', {
+                {...register('phone', {
                   required: 'Este campo es requerido'
                 })}
                 error={!!errors.phone}
@@ -181,7 +181,7 @@ const AddressPage: NextPage = () => {
           </Grid>
 
           <Box sx={{ mt: 5 }} display='flex' justifyContent='center'>
-            <Button type="submit" color="secondary" className="circular-btn" size="large">
+            <Button type='submit' color='secondary' className='circular-btn' size='large'>
               Revisar pedido
             </Button>
           </Box>

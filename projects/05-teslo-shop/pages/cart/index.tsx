@@ -40,7 +40,7 @@ const CartPage: NextPage = () => {
 
               <Box sx={{ mt: 3 }}>
                 <Button 
-                  color="secondary"
+                  color='secondary'
                   className='circular-btn' 
                   fullWidth
                   href='/checkout/address'

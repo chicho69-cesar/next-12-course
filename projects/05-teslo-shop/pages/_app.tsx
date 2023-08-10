@@ -6,8 +6,8 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { SWRConfig } from 'swr'
 
-import { lightTheme } from '../themes'
 import { AuthProvider, CartProvider, UiProvider } from '../context'
+import { lightTheme } from '../themes'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       >
         <SWRConfig
           value={{
-            fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
+            fetcher: (resource, init) => fetch(resource, init).then((res) => res.json())
           }}
         >
           <AuthProvider>

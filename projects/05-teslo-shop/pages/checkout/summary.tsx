@@ -90,9 +90,9 @@ const SummaryPage: NextPage = () => {
 
               <OrderSummary />
 
-              <Box sx={{ mt: 3 }} display="flex" flexDirection="column">
+              <Box sx={{ mt: 3 }} display='flex' flexDirection='column'>
                 <Button 
-                  color="secondary"
+                  color='secondary'
                   className='circular-btn' 
                   fullWidth
                   onClick={onCreateOrder}
@@ -102,7 +102,7 @@ const SummaryPage: NextPage = () => {
                 </Button>
 
                 <Chip 
-                  color="error"
+                  color='error'
                   label={errorMessage}
                   sx={{ display: errorMessage ? 'flex' : 'none', mt: 2 }}
                 />

@@ -37,7 +37,7 @@ export const cartReducer = (state: CartState, action: CartActionType): CartState
     case '[Cart] - Change cart quantity':
       return {
         ...state,
-        cart: state.cart.map((product: ICartProduct) => {
+        cart: state.cart.map((product) => {
           if (product._id !== action.payload._id) return product
           if (product.size !== action.payload.size) return product
           return action.payload
@@ -47,7 +47,7 @@ export const cartReducer = (state: CartState, action: CartActionType): CartState
     case '[Cart] - Remove product in cart':
       return {
         ...state,
-        cart: state.cart.filter((product: ICartProduct) => !(product._id === action.payload._id && product.size === action.payload.size))
+        cart: state.cart.filter((product) => !(product._id === action.payload._id && product.size === action.payload.size))
       }
 
     case '[Cart] - Update order summary':

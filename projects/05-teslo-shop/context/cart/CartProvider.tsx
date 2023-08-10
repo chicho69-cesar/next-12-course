@@ -33,7 +33,6 @@ interface Props {
 export const CartProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer , CART_INITIAL_STATE)
 
-  // Efecto
   useEffect(() => {
     try {
       const cookieProducts = Cookie.get('cart') ? JSON.parse(Cookie.get('cart')!) : []
@@ -88,14 +87,14 @@ export const CartProvider: FC<Props> = ({ children }) => {
     // dispatch({ type: '[Cart] - Add Product', payload: [...productsInCart, product] })
 
     //! Nivel Final
-    const productInCart = state.cart.some((p: ICartProduct) => p._id === product._id)
+    const productInCart = state.cart.some((p) => p._id === product._id)
     if (!productInCart) return dispatch({ type: '[Cart] - Update products in cart', payload: [...state.cart, product] })
 
-    const productInCartButDifferentSize = state.cart.some((p: ICartProduct) => p._id === product._id && p.size === product.size)
+    const productInCartButDifferentSize = state.cart.some((p) => p._id === product._id && p.size === product.size)
     if (!productInCartButDifferentSize) return dispatch({ type: '[Cart] - Update products in cart', payload: [...state.cart, product] })
 
     // Acumular
-    const updatedProducts = state.cart.map((p: ICartProduct) => {
+    const updatedProducts = state.cart.map((p) => {
       if (p._id !== product._id) return p
       if (p.size !== product.size) return p
 

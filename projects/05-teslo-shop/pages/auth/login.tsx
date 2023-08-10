@@ -34,8 +34,7 @@ const LoginPage: NextPage = () => {
     })
   }, [])
 
-  const onLoginUser = async( { email, password }: FormData ) => {
-
+  const onLoginUser = async({ email, password }: FormData) => {
     setShowError(false)
 
     // const isValidLogin = await loginUser( email, password )

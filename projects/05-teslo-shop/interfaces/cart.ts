@@ -7,6 +7,6 @@ export interface ICartProduct {
   size?: ISize
   slug: string
   title: string
-  gender: 'men'|'women'|'kid'|'unisex'
+  gender: 'men' | 'women' | 'kid' | 'unisex'
   quantity: number
 }

@@ -104,7 +104,6 @@ const OrderPage: NextPage<Props> = ({ order }) => {
               />
 
               <Box sx={{ mt: 3 }} display='flex' flexDirection='column'>
-                {/* TODO */}
                 <Box 
                   display='flex'
                   justifyContent='center'

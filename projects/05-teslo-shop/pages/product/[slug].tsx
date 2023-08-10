@@ -88,7 +88,7 @@ const ProductPage: NextPage<Props> = ({ product }) => {
             {/* Agregar al carrito */}
             {product.inStock > 0 ? (
               <Button 
-                color="secondary" 
+                color='secondary' 
                 className='circular-btn'
                 onClick={onAddProduct}
               >
@@ -99,7 +99,7 @@ const ProductPage: NextPage<Props> = ({ product }) => {
                 }
               </Button>
             ) : (
-              <Chip label="No hay disponibles" color="error" variant='outlined' />
+              <Chip label='No hay disponibles' color='error' variant='outlined' />
             )}
 
             {/* Descripción */}
@@ -159,16 +159,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return {
       redirect: {
         destination: '/',
-        permanent: false
+        permanent: false,
       }
     }
   }
 
   return {
     props: {
-      product
+      product,
     },
-    revalidate: 60 * 60 * 24
+    revalidate: 60 * 60 * 24,
   }
 }
 

@@ -1,8 +1,8 @@
-import { FC } from 'react'
-import { Slide } from 'react-slideshow-image'
-
 import 'react-slideshow-image/dist/styles.css'
 import styles from './ProductSlideshow.module.css'
+
+import { FC } from 'react'
+import { Slide } from 'react-slideshow-image'
 
 interface Props {
   images: string[]
@@ -11,11 +11,11 @@ interface Props {
 export const ProductSlideshow: FC<Props> = ({ images }) => {
   return (
     <Slide
-      easing="ease"
+      easing='ease'
       duration={ 7000 }
       indicators
     >
-      {images.map((image: string) =>  {
+      {images.map((image) =>  {
         return (
           <div className={styles['each-slide']} key={image}>
             <div 

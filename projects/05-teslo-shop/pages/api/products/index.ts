@@ -8,7 +8,7 @@ type Data =
   | { message: string }
   | IProduct[]
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default function handler (req: NextApiRequest, res: NextApiResponse<Data>) {
   switch (req.method) {
     case 'GET':
       return getProducts(req, res)
