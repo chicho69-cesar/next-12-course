@@ -7,9 +7,9 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import { SWRConfig } from 'swr'
 
 import { AuthProvider, CartProvider, UiProvider } from '../context'
-import { lightTheme } from '../themes'
+import { lightTheme, darkTheme } from '../themes'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp ({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider>
       <PayPalScriptProvider 

@@ -1,16 +1,16 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme } from '@mui/material'
 
-export const lightTheme = createTheme({
+export const darkTheme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
-      main: '#1E1E1E'
+      main: '#E1E1E1'
     },
     secondary: {
       main: '#3A64D8'
     },
     info: {
-      main: '#fff'
+      main: '#000'
     }
   },
   components: {
@@ -26,7 +26,7 @@ export const lightTheme = createTheme({
       },
       styleOverrides: {
         root: {
-          backgroundColor: 'white',
+          backgroundColor: 'black',
           height: 60
         },
       }
@@ -38,7 +38,7 @@ export const lightTheme = createTheme({
           fontWeight: 600
         },
         h2: {
-          fontSize: 20,
+          fontsize: 20,
           fontWeight: 400
         },
         subtitle1: {
@@ -60,7 +60,7 @@ export const lightTheme = createTheme({
           boxShadow: 'none',
           borderRadius: 10,
           ":hover": {
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0.15)',
             transition: 'all 0.3s ease-in-out'
           }
         }
